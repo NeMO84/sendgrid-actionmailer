@@ -9,12 +9,15 @@ require 'sendgrid-ruby'
 module SendGridActionMailer
   class DeliveryMethod
     attr_reader :client
+    attr_accessor :settings
 
     def initialize(params)
       @client = SendGrid::Client.new do |c|
         c.api_user = params[:api_user]
         c.api_key  = params[:api_key]
       end
+
+      @settings = {}
     end
 
     def deliver!(mail)
